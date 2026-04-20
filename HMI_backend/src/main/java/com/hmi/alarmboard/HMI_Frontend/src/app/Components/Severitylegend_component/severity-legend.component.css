@@ -1,0 +1,29 @@
+.filter-pill {
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.all { border-color: #6c757d; color: #6c757d; }
+.high { border-color: #dc3545; color: #dc3545; }
+.medium { border-color: #ffc107; color: #ffc107; }
+.low { border-color: #0dcaf0; color: #0dcaf0; }
+.active { border-color: #dc3545; color: #dc3545; }
+.acknowledged { border-color: #0d6efd; color: #0d6efd; }
+.cleared { border-color: #28a745; color: #28a745; }
+
+.filter-pill.selected {
+  background-color: lightgreen;
+  color: #000 !important;
+  border-color: lightgreen;
+}
+
+.filter-pill:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}

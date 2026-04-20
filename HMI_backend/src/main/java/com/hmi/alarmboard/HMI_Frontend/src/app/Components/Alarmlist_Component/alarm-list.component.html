@@ -1,0 +1,57 @@
+<div class="table-responsive mb-4 shadow-sm border rounded bg-white">
+  <table class="table table-hover align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th>MachineId</th>
+        <th>AlarmId</th>
+        <th>Code</th>
+        <th>Alarm</th>
+        <th>Severity</th>
+        <th>Timestamp</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of events; trackBy: trackByEventId">
+        <td>
+          <div class="custom-hover text-primary fw-bold">
+            {{ e.machine.id }}
+            <div class="hover-box">
+              <span class="hover-title">Machine Data</span>
+              <strong>Name:</strong> {{ e.machine.name || 'Unknown' }}<br>
+              <strong>Location:</strong> {{ e.machine.location || 'N/A' }}
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="custom-hover text-secondary fw-bold">
+            #{{ e.alarm.id }}
+            <div class="hover-box">
+              <span class="hover-title">Alarm Profile</span>
+              <strong>Code:</strong> {{ e.alarm.code }}<br>
+              <strong>Severity:</strong> {{ e.alarm.severity }}<br>
+              <strong>Details:</strong> {{ e.alarm.message }}
+            </div>
+          </div>
+        </td>
+        <td class="text-center">
+          <span class="code-display border rounded bg-light text-center">
+            {{ e.alarm.code }}
+          </span>
+        </td>
+        <td>{{ e.alarm.message }}</td>
+        <td>
+          <span [ngClass]="severityClass(e.alarm.severity)" class="badge severity-badge">
+            {{ e.alarm.severity }}
+          </span>
+        </td>
+        <td>{{ e.ts | date:'mediumTime' }}</td>
+        <td class="text-center">
+          <button *ngIf="e.state === 'ACTIVE'" class="btn btn-sm btn-danger px-3" (click)="onAck(e)">Active</button>
+          <button *ngIf="e.state === 'ACKNOWLEDGED'" class="btn btn-sm btn-primary px-2" (click)="onClear(e)">Acknowledge</button>
+          <span *ngIf="e.state === 'CLEARED'" class="text-success fs-4 fw-bold">✓</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
